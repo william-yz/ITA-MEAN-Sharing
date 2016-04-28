@@ -18,11 +18,20 @@ app.set('view engine', 'ejs')
 app.set('views', './')
 
 app.use((req, res, next) => {
-  let startTime = Date.now();
+  var startTime = Date.now();
+  var end = res.end.bind(res);
+  res.end = function (data, encoding, callback) {
+    var newCallback = function() {
+      if (typeof callback === 'function') {
+        callback();
+      }
+      var endTime = Date.now();
+      var log = `Time: ${new Date()} ,IP : ${req.ip}, PATH: ${req.path} , take : ${endTime - startTime} ms ${os.EOL}`
+      fs.appendFile('./request.log', log)
+    }
+    return end(data, encoding, newCallback);
+  }
   next()
-  let endTime = Date.now();
-  let log = `Time: ${new Date()} ,IP : ${req.ip}, PATH: ${req.path} , take : ${endTime - startTime} ms ${os.EOL}`
-  fs.appendFile('./request.log', log)
 })
 
 
@@ -47,14 +56,18 @@ app.get('/login', (req, res) => {
 })
 
 app.route('/doLogin')
-  .post((req, res) => {
+  .post((req, res, next) => {
+
     MongoClient.connect('mongodb://localhost:27017/ita', (err, db) => {
       if (err) console.log(err)
       var collection = db.collection('users');
       collection.findOne({name : req.body.user}, (err,doc) => {
         if (doc) {
-          res.cookie('itauser', req.body.user)
-          res.render('success.ejs', {user : req.body.user})
+          setTimeout(() => {
+            res.cookie('itauser', req.body.user)
+            res.render('success.ejs', {user : req.body.user})
+          }, 1000)
+
         } else {
           res.redirect('/login')
         }
@@ -63,7 +76,6 @@ app.route('/doLogin')
 
 
 })
-
 
 app.listen(3000, () => {
   console.log('Server Start')
