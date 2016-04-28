@@ -6,6 +6,9 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const fs = require('fs')
 const os = require('os')
+const MongoClient = require('mongodb').MongoClient
+
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
@@ -18,20 +21,20 @@ app.use((req, res, next) => {
   let startTime = Date.now();
   next()
   let endTime = Date.now();
-  let log = `Time: ${new Date()} ,IP : ${req.ip}, PATH: ${req.path} , take : ${endTime - startTime} ms ${os.EOL}`;
+  let log = `Time: ${new Date()} ,IP : ${req.ip}, PATH: ${req.path} , take : ${endTime - startTime} ms ${os.EOL}`
   fs.appendFile('./request.log', log)
 })
 
 
 app.use((req, res, next) => {
-  if (req.cookies.itauser) {
-    req.body= {user : req.cookies.itauser};
-    next()
+  if (req.path === '/login' || req.path === '/doLogin') {
+    next();
   } else {
-    if (req.path !== '/login' && req.path !== '/doLogin') {
-      res.redirect('/login');
-    } else {
+    if (req.cookies.itauser) {
+      req.body= {user : req.cookies.itauser};
       next()
+    } else {
+      res.redirect('/login');
     }
   }
 })
@@ -45,8 +48,20 @@ app.get('/login', (req, res) => {
 
 app.route('/doLogin')
   .post((req, res) => {
-  res.cookie('itauser', req.body.user)
-  res.render('success.ejs', {user : req.body.user})
+    MongoClient.connect('mongodb://localhost:27017/ita', (err, db) => {
+      if (err) console.log(err)
+      var collection = db.collection('users');
+      collection.findOne({name : req.body.user}, (err,doc) => {
+        if (doc) {
+          res.cookie('itauser', req.body.user)
+          res.render('success.ejs', {user : req.body.user})
+        } else {
+          res.redirect('/login')
+        }
+      })
+    })
+
+
 })
 
 
