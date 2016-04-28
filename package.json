@@ -1,0 +1,25 @@
+{
+  "name": "ita-mean-sharing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/william-yz/ITA-MEAN-Sharing.git"
+  },
+  "author": "William Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/william-yz/ITA-MEAN-Sharing/issues"
+  },
+  "homepage": "https://github.com/william-yz/ITA-MEAN-Sharing#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  }
+}

@@ -1,33 +1,31 @@
 'use strict'
 
-const http = require('http')
-const qs = require('querystring')
-const fs = require('fs')
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
-http.createServer((req, res) => {
-  var url = require('url').parse(req.url),
-      path = url.pathname
-  if (req.method === 'GET') {
-    if (path === '/home') {
-      res.setHeader('Content-Type', 'text/html')
-      fs.createReadStream('./index.html').pipe(res)
-    } else if (path === '/login') {
-      res.setHeader('Content-Type', 'text/html')
-      fs.createReadStream('./login.html').pipe(res)
-    } else if (path === '/doLogin'){
-      console.log();
-      res.setHeader('Content-Type', 'text/html')
-      const user = qs.parse(url.query).user
-      fs.readFile('./success.html', (err, content) => {
-        res.end(content.toString().replace(/\${(.*)}/, user))
-      })
-    } else {
-      res.statusCode = '404';
-      res.end();
-    }
-  }
+app.set('view engine', 'ejs')
+app.set('views', './')
 
-}).listen(3000, () => {
-  console.log('Server start, port : 3000');
+
+app.get('/home', (req, res) => {
+  res.sendFile(__dirname +'/index.html')
+})
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname +'/login.html')
+})
+
+app.route('/doLogin')
+  .post((req, res) => {
+  res.render('success.ejs', {user : req.body.user})
+})
+
+
+app.listen(3000, () => {
+  console.log('Server Start')
 })
