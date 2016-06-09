@@ -1,0 +1,54 @@
+<div class="modal-body">
+  <form name="seekerForm">
+
+    <div class="form-group  ">
+      <div>
+        <label class="control-label">Name</label>
+        <input type="text" name="name" class="form-control"
+               ng-model="seeker.name"
+               required maxlength="5" minlength="4">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label class="control-label">School</label>
+        <input type="text" name="school" class="form-control"
+               ng-model="seeker.school"
+               ng-minlength="2"
+               ng-maxlength="4"
+               required>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <div>
+      <label class="control-label">Email</label>
+      <input type="email" name="email" class="form-control"
+             ng-model="seeker.email"
+             ng-minlength="1"
+             ng-maxlength="255"
+             required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <label class="control-label">Mb Phone</label>
+        <input type="number" name="phone" class="form-control"
+               ng-model="seeker.phone"
+               ng-minlength="1"
+               ng-maxlength="11"
+               required>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <button type="submit" class="btn  btn-primary" ng-click="submit(seekerForm.$valid)">Save</button>
+      <button type="reset" class="btn  btn-primary" ng-click="cancel()">cancel</button>
+    </div>
+
+  </form>
+</div>

@@ -36,8 +36,9 @@ module.exports = {
     p3p: 'ABCDEF',
     xssProtection: true
   },
-  logo: 'modules/core/client/img/brand/logo.png',
-  favicon: 'modules/core/client/img/brand/favicon.ico',
+  //logo: 'modules/core/client/img/brand/logo.png',
+  //favicon: 'modules/core/client/img/brand/favicon.ico',
+  favicon:'favicon.ico',
   uploads: {
     profileUpload: {
       dest: './modules/users/client/img/profile/uploads/', // Profile upload destination path

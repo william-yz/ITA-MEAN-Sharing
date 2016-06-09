@@ -16,13 +16,10 @@
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
 
-<body class="ng-cloak">
-  <header ng-include="'/client/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-  <section class="content">
-    <section class="container">
-      {% block content %}{% endblock %}
-    </section>
-  </section>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+    {% block content %}{% endblock %}
+</div>
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
