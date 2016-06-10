@@ -1,0 +1,26 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <link rel="stylesheet" href="/lib/weui/dist/style/weui.min.css">
+</head>
+<body>
+    <div class="container" id="container"><div class="article">
+      <div class="hd">
+          <h1 class="page_title">{{data.title}}</h1>
+      </div>
+      <div class="bd">
+          <article class="weui_article">
+              <!-- <h1>{{data.title}}</h1> -->
+              <section>
+                  <h2 class="title">{{data.salary}}</h2>
+                  <section>
+                      <p>{{data.description}}</p>
+                  </section>
+              </section>
+          </article>
+      </div>
+    <a href="/position/apply/{{data.id}}" class="weui_btn weui_btn_plain_primary">申请职位</a>
+    <a href="/position" class="weui_btn weui_btn_plain_primary">返回</a>
+
+</body>
+</html>
