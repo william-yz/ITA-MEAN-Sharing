@@ -191,7 +191,9 @@ module.exports.initRestifyMongoose = function (app) {
   var mongoose = require('mongoose');
   restify.serve(router,mongoose.model('Position'));
   restify.serve(router,mongoose.model('Application'));
-
+    restify.serve(router, mongoose.model('Seeker'));
+    restify.serve(router, mongoose.model('Staff'));
+    restify.serve(router, mongoose.model('Company'));
   app.use(router);
 }
 

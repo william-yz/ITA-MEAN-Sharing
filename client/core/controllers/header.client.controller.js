@@ -18,7 +18,7 @@ angular.module('backendMaintain').controller('seekersMaintain', ['$rootScope', '
 
 
     $scope.getData = function(){
-        $http.post('/api/seeker/getAll').then(function(res){
+        $http.post('/api/v1/seeker').then(function(res){
             if(res){
                 console.log(res.data);
                 $scope.myData.data = res.data;
