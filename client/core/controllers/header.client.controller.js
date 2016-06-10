@@ -18,7 +18,7 @@ angular.module('backendMaintain').controller('seekersMaintain', ['$rootScope', '
 
 
     $scope.getData = function(){
-        $http.post('/api/v1/seeker').then(function(res){
+        $http.get('/api/v1/seeker').then(function(res){
             if(res){
                 console.log(res.data);
                 $scope.myData.data = res.data;
@@ -55,7 +55,7 @@ angular.module('backendMaintain').controller('seekersMaintain', ['$rootScope', '
         }else{
             $rootScope.entity = $scope.gridApi.grid.selection.lastSelectedRow.entity;
             $uibModal.open({
-                templateUrl: './modalTemplate.html',
+                templateUrl: 'client/core/views/modalTemplate.html',
                 controller: 'seekerUpdate',
                 size: 'md',
                 backdrop: 'static'
@@ -65,7 +65,7 @@ angular.module('backendMaintain').controller('seekersMaintain', ['$rootScope', '
 
     $scope.createSeeker = function(){
         $uibModal.open({
-            templateUrl: './modalTemplate.html',
+            templateUrl: 'client/core/views/modalTemplate.html',
             controller: 'seekerCreate',
             size: 'md',
             backdrop: 'static'
@@ -108,7 +108,7 @@ angular.module('backendMaintain').controller('seekerUpdate', ['$rootScope', '$sc
 
         $scope.seeker = _.cloneDeep($rootScope.entity);
         $scope.submit = function(){
-            $http.post('/api/seeker/update', $scope.seeker).success(function (data){
+            $http.put('/api/v1/seeker/'+ $scope.seeker._id, $scope.seeker).success(function (data){
                 console.log('s');
                 $uibModalInstance.close('ok');
                 toaster.pop('success', 'update success');
@@ -128,7 +128,7 @@ angular.module('backendMaintain').controller('seekerUpdate', ['$rootScope', '$sc
 angular.module('backendMaintain').controller('seekerCreate', [ '$rootScope','$scope', '$http', '$uibModal', '$uibModalInstance', 'toaster',
     function ($rootScope, $scope, $http, $uibModal, $uibModalInstance, toaster) {
         $scope.submit = function(){
-            $http.post('/api/seeker/new', $scope.seeker).success(function (data){
+            $http.post('/api/v1/seeker', $scope.seeker).success(function (data){
                 $uibModalInstance.close('ok');
                 toaster.pop('success', 'Create success');
                 $rootScope.refreshForCreateOrUpdate($scope.seeker);
