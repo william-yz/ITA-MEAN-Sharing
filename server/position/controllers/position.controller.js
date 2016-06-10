@@ -1,41 +1,42 @@
 'use strict';
 
 var request = require('superagent');
-
+var mongoose = require('mongoose');
+var Position = mongoose.model('Position');
+var Application = mongoose.model('Application');
 module.exports.index = function (req, res) {
-  request.get(req.app.locals.backendUrl + '/api/v1/position')
+  Position.find({})
          .then(result => {
-           res.render('./position/view/index', {
-             data : result.body
+           res.render('./public/modules/position/views/index', {
+             data : result
            });
          });
 }
 
 module.exports.detail = function (req, res) {
-  request.get(req.app.locals.backendUrl + '/api/v1/position/' + req.params._id)
+  console.log(req.params._id);
+  Position.findOne({_id : req.params._id})
          .then(result => {
-           console.log(result.body);
-           res.render('./position/view/detail', {
-             data : result.body
+           console.log(result);
+           res.render('./public/modules/position/views/detail', {
+             data : result
            });
          });
 }
 
 module.exports.applyPosition = function (req, res) {
-  request.get(req.app.locals.backendUrl + '/api/v1/position/' + req.params._id)
+  Position.findOne({_id : req.params._id})
          .then(result => {
-           console.log(result.body);
-           res.render('./position/view/apply', {
-             data : result.body
+           res.render('./public/modules/position/views/apply', {
+             data : result
            });
          });
 }
 
 module.exports.apply = function (req, res) {
   req.body.position = req.params._id;
-  request.post(req.app.locals.backendUrl + '/api/v1/application')
-         .send(req.body)
+  Application.update({_id : req.params._id}, req.body)
          .then(() => {
-           res.render('./position/view/success');
+           res.render('./public/modules/position/views/success');
          });
 }

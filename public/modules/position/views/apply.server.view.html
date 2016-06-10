@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <link rel="stylesheet" href="/lib/weui/dist/style/weui.min.css">
+</head>
+<body>
+  <div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">
+      <h1>申请职位</h1>
+    </div>
+    <form action="/position/apply/{{data.id}}" method="post">
+      <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" name="name" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="number"name="phone" placeholder="请输入手机号">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">毕业学校</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" name="college" placeholder="请输入学校">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">邮箱</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" pattern=".*@.*" name="email" placeholder="请输入学校">
+            </div>
+        </div>
+      </div>
+      <a class="weui_btn weui_btn_primary" href="javascript:document.getElementsByTagName('form')[0].submit();" id="showTooltips">提交</a>
+      <a class="weui_btn weui_btn_primary" href="javascript:void 0" id="showTooltips">返回</a>
+    </form>
+  </div>
+
+</body>
+</html>

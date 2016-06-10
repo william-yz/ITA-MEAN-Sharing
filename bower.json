@@ -18,8 +18,8 @@
     "meta.umeditor": "*",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
     "AdminLTE": "adminlte#^2.3.3",
-    "ng-admin": "^0.9.1"
-  },
+    "ng-admin": "^0.9.1",
+    "weui": "^0.4.2"
   "resolutions": {
     "angular": "~1.5.0"
   }
