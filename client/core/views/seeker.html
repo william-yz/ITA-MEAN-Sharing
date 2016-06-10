@@ -1,0 +1,24 @@
+<!-- Main content -->
+<section class="content"  ng-app="backendMaintain" ng-controller="seekersMaintain">
+
+    <!-- Your Page Content Here -->
+    <div class="carrier-section-position" >
+        <!--<h1 class="carrier-title-margin"><a class="no-underline" >Seekers Maintain</a></h1>-->
+        <!--<ul class="nav nav-tabs" ng-init="$scope.activeTab=1">-->
+        <!--<li ng-class="{active: $scope.activeTab == 1}"><a href="javascript:;" ng-click="$scope.activeTab = 1">Search</a></li>-->
+        <!--&lt;!&ndash;<li class="pull-right"><a class="btn btn-primary" id="createbtn" ng-click="createModal()">New Carrier</a></li>&ndash;&gt;-->
+        <!--</ul>-->
+        <div class="tab-content tab-bordered">
+            <section>
+                <div class="text-right">
+                    <button class='btn btn-info'  ng-click="createSeeker()">Create</button>
+                    <button class="btn btn-warning" ng-click="updateSeeker()">Update</button>
+                    <button class="btn btn-success" ng-click="preview()">Preview</button>
+                </div>
+                <div ui-grid="myData" ui-grid-pagination ui-grid-cellNav  ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-exporter></div>
+            </section>
+        </div>
+    </div>
+    <toaster-container toaster-options="{'time-out': 3000, 'animation-class': 'geo-toast-top-right'}"></toaster-container>
+
+</section>

@@ -107,17 +107,18 @@ angular.module('backendMaintain').controller('seekerUpdate', ['$rootScope', '$sc
         }
 
         $scope.seeker = _.cloneDeep($rootScope.entity);
-        $scope.submit = function(){
-            $http.put('/api/v1/seeker/'+ $scope.seeker._id, $scope.seeker).success(function (data){
-                console.log('s');
-                $uibModalInstance.close('ok');
-                toaster.pop('success', 'update success');
-                $rootScope.refreshForCreateOrUpdate(null);
-            }).error(function(){
-                console.log('2');
-                toaster.pop('error', 'update fail,try again');
-            });
-
+        $scope.submit = function(isValid){
+            if(isValid){
+                $http.put('/api/v1/seeker/'+ $scope.seeker._id, $scope.seeker).success(function (data){
+                    console.log('s');
+                    $uibModalInstance.close('ok');
+                    toaster.pop('success', 'update success');
+                    $rootScope.refreshForCreateOrUpdate(null);
+                }).error(function(){
+                    console.log('2');
+                    toaster.pop('error', 'update fail,try again');
+                });
+            }
         }
         $scope.cancel = function () {
             $uibModalInstance.close('cancel');
@@ -127,15 +128,17 @@ angular.module('backendMaintain').controller('seekerUpdate', ['$rootScope', '$sc
 
 angular.module('backendMaintain').controller('seekerCreate', [ '$rootScope','$scope', '$http', '$uibModal', '$uibModalInstance', 'toaster',
     function ($rootScope, $scope, $http, $uibModal, $uibModalInstance, toaster) {
-        $scope.submit = function(){
-            $http.post('/api/v1/seeker', $scope.seeker).success(function (data){
-                $uibModalInstance.close('ok');
-                toaster.pop('success', 'Create success');
-                $rootScope.refreshForCreateOrUpdate($scope.seeker);
-            }).error(function(){
-                console.log('2');
-                toaster.pop('error', 'Create fail,try again');
-            })
+        $scope.submit = function(isValid){
+            if(isValid){
+                $http.post('/api/v1/seeker', $scope.seeker).success(function (data){
+                    $uibModalInstance.close('ok');
+                    toaster.pop('success', 'Create success');
+                    $rootScope.refreshForCreateOrUpdate($scope.seeker);
+                }).error(function(){
+                    console.log('2');
+                    toaster.pop('error', 'Create fail,try again');
+                })
+            }
 
         }
         $scope.cancel = function () {

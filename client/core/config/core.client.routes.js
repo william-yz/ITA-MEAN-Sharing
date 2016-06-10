@@ -16,7 +16,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     .state('home', {
       url: '/',
       templateUrl: 'client/core/views/home.client.view.html'
-    })
+    }).state('occupation', {
+            url: '/occupation',
+            templateUrl: 'client/core/views/occupation.html'
+        }).state('seeker', {
+            url: '/seeker',
+            templateUrl: 'client/core/views/seeker.html'
+        })
     .state('not-found', {
       url: '/not-found',
       templateUrl: 'client/core/views/404.client.view.html',
@@ -31,6 +37,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
+
     .state('forbidden', {
       url: '/forbidden',
       templateUrl: 'client/core/views/403.client.view.html',
